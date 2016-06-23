@@ -21,16 +21,21 @@ $('#ircchannels').on('click', 'span.close', function () {
 
 function get_channel_data(url, params, channels, success_callback, error_callback) {
   $.getJSON(url, params, function(data) {
-    if (data.length === 0) {
-      success_callback(channels);
-    } else {
-      channels.push.apply(channels, data);
-      // API fetches 20 at a time
-      params.offset += 20;
-      get_channel_data(url, params, channels, success_callback, error_callback);
-    }
-  })
-  .fail(error_callback);
+    //if (data.length === 0) {
+      // $.getJSON(url.concat('_recent'), params, function(data) {
+      // console.log("adding new data");
+      // console.log(data);
+      // 	channels.push.apply(channels,data);
+      // }).fail(error_callback);
+      // console.log("done getting all files");
+      // success_callback(channels);
+    //} else {
+    channels.push.apply(channels, data);
+    success_callback(channels);
+    // API fetches 20 at a time
+      // params.offset += 20;
+      // get_channel_data(url, params, channels, success_callback, error_callback);
+  }).fail(error_callback);
 }
 
 $("#irc_channels_select").chosen().change(function() {
@@ -80,6 +85,8 @@ $('#ircchannels').on('click', 'a.ircshow', function() {
   $('#ircmodal').modal('toggle');
 
   get_channel_data(url, params, [], display_irc_channels_data, display_irc_not_implemented);
+  params.offset = 0;
+  //get_channel_data(url . "_recent", params, [], display_irc_channels_data, display_irc_not_implemented);
 });
 
 function display_irc_channels_data(channels) {
