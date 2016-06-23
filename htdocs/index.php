@@ -1,4 +1,5 @@
 <?php
+
 require_once 'phplib/CurlClient.php';
 require_once 'phplib/Postmortem.php';
 require_once 'phplib/Configuration.php';
@@ -11,15 +12,17 @@ require_once 'vendor/autoload.php';
 if (!defined('MORGUE_VERSION')) {
     define('MORGUE_VERSION', '');
 }
+// ob_start();
+session_start();
 
 $config = Configuration::get_configuration();
 
 if (!$config) {
-	$message = "Could not parse configuration file.";
-	$content = "error";
-	error_log("ERROR: " . $message);
-	include '../views/page.php';
-	die();
+    $message = "Could not parse configuration file.";
+    $content = "error";
+    error_log("ERROR: " . $message);
+    include '../views/page.php';
+    die();
 }
 $app = new \Slim\Slim();
 $app->config('debug', true);
@@ -27,9 +30,9 @@ $app->config('debug', true);
 $app->log->setEnabled(true);
 
 if ($config['environment'] == "development") {
-	$app->log->setLevel(4);
+    $app->log->setLevel(4);
 } else {
-	$app->log->setLevel(1);
+    $app->log->setLevel(1);
 }
 
 // must be require_once'd after the Slim autoloader is registered
@@ -44,9 +47,9 @@ function getUserTimezone() {
     $tz = 'America/New_York';
 
     if ( isset($_SESSION['timezone']) ) {
-      $tz = $_SESSION['timezone'];
+        $tz = $_SESSION['timezone'];
     } else if ( isset($config['timezone']) ) {
-      $tz = $config['timezone'];
+        $tz = $config['timezone'];
     }
 
     return $tz;
@@ -287,12 +290,12 @@ $app->get('/events/:id/summary', function($id) use ($app) {
 $app->get('/events/:id/lock', function($id) use ($app) {
     header("Content-Type: application/json");
     $event = Postmortem::get_event($id);
-    
+
     $status = Postmortem::get_event_edit_status($event);
-    
+
     if($status === Postmortem::EDIT_UNLOCKED) {
         Postmortem::set_event_edit_status($id);
-    } 
+    }
 
     $return = ["status" => $status, "modifier" => $event["modifier"]];
 
@@ -418,18 +421,18 @@ $app->put('/events/:id', function ($id) use ($app) {
 $app->post('/events/:id/history', function($id) use ($app) {
     header("Content-Type: application/json");
     $action = $app->request->post('action');
-    
+
     $event = array(
         "id" => $id,
         "summary" => $app->request->post('summary'),
         "why_surprised" => $app->request->post('why_surprised')
-        );
+    );
 
     // store history
     $env = $app->environment;
     $admin = $env['admin']['username'];
     $result = Postmortem::add_history($event, $admin, $action);
-    
+
     echo json_encode($result);
 });
 
@@ -476,31 +479,39 @@ $app->get('/ping', function () use ($app) {
 // Handle custom static assets.
 // Javascript first then CSS.
 $app->get('/features/:feature/js/:path' , function ($feature, $path) use ($app) {
-        // read the file if it exists. Then serve it back.
-        $file = stream_resolve_include_path("features/{$feature}/assets/js/{$path}");
-        if (!$file) {
-            $app->response->status(404);
-            $app->log->error("couldn't file custom js asset at $path");
-            return;
-        }
-        $thru_file = file_get_contents($file);
-        $app->response->header("Content-Type", "application/javascript");
-        print $thru_file;
+    // read the file if it exists. Then serve it back.
+    $file = stream_resolve_include_path("features/{$feature}/assets/js/{$path}");
+    if (!$file) {
+        $app->response->status(404);
+        $app->log->error("couldn't file custom js asset at $path");
         return;
+    }
+    $thru_file = file_get_contents($file);
+    $app->response->header("Content-Type", "application/javascript");
+    print $thru_file;
+    return;
 });
 
 $app->get('/features/:feature/css/:path' , function ($feature, $path) use ($app) {
-        // read the file if it exists. Then serve it back.
-        $file = stream_resolve_include_path("features/{$feature}/assets/css/{$path}");
-        if (!$file) {
-            $app->response->status(404);
-            $app->log->error("couldn't file custom css asset at $path");
-            return;
-        }
-        $thru_file = file_get_contents($file);
-        $app->response->header("Content-Type", "text/css");
-        print $thru_file;
+    // read the file if it exists. Then serve it back.
+    $file = stream_resolve_include_path("features/{$feature}/assets/css/{$path}");
+    if (!$file) {
+        $app->response->status(404);
+        $app->log->error("couldn't file custom css asset at $path");
         return;
+    }
+    $thru_file = file_get_contents($file);
+    $app->response->header("Content-Type", "text/css");
+    print $thru_file;
+    return;
 });
+$ar = array(
+    'hi' => 'bye'
+);
+
+#}
+
+# $_SESSION['NEED_AUTH'] = True;
 
 $app->run();
+?>
