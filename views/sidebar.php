@@ -1,12 +1,21 @@
+<?php
+            $app = \Slim\Slim::getInstance();
+            $env = $app->environment;
+            $admin = $env['admin']['username'];
+?>
 <div class="row-fluid">
+  <?php if ($admin != 'Not Signed In') { ?>
   <a class="btn btn-large btn-block btn-primary btn-success" data-toggle="modal" href="#create" data-target="#create">
     <i class="icon-plus icon-white"></i> Create
   </a>
+  <?php } ?>
 </div>
 <div class="row-fluid">
   <!-- History Here -->
 </div>
 <?php if (isset($tags)) : ?>
+<hr/>
+Current User: <?php echo $admin; ?>
 <hr/>
 <div class="row-fluid" id="tag_row">
 	<b>Filter by Tags</b>
@@ -29,5 +38,12 @@
 	</div>
 </div>
 <?php endif ?>
-<?php include __DIR__.'/modal/create.php' ?>
+<?php 
+            $app = \Slim\Slim::getInstance();
+            $env = $app->environment;
+            $admin = $env['admin']['username'];
+if ($admin != "Not Signed In") {
+    include __DIR__.'/modal/create.php'; 
+}
+?>
 <script type="text/javascript" src="/assets/js/tags.js"></script>
