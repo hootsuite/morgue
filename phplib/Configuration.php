@@ -5,6 +5,23 @@
  */
 class Configuration {
 
+    static function get_current_username() {
+        if (isset($_COOKIE['morgue_username'])) {
+            return $_COOKIE['morgue_username'];
+        } else {
+            return "Not Signed In";
+        }
+    }
+
+    static function set_current_username($name = null) {
+        if (is_null($name)) {
+            setCookie('morgue_username', 'Not Signed In', time() + (86400 * 30), "/");
+        }
+        else {
+            setCookie('morgue_username', $name, time() + (86400 * 30), "/");
+        }
+    }
+
     /**
      * get the configuration from the JSON files
      *
