@@ -1,4 +1,5 @@
 <?php
+Configuration::set_current_username('Not Signed In');
 $_SESSION['username'] = "Not Signed In";
 //            $app = \Slim\Slim::getInstance();
 //            $env = $app->environment;
