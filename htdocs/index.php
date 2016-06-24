@@ -13,6 +13,7 @@ if (!defined('MORGUE_VERSION')) {
     define('MORGUE_VERSION', '');
 }
 // ob_start();
+session_cache_limiter(false);
 session_start();
 
 $config = Configuration::get_configuration();
