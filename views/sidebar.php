@@ -1,10 +1,5 @@
-<?php
-            $app = \Slim\Slim::getInstance();
-            $env = $app->environment;
-            $admin = $env['admin']['username'];
-?>
 <div class="row-fluid">
-  <?php if ($admin != 'Not Signed In') { ?>
+  <?php if (Configuration::get_current_username() != 'Not Signed In') { ?>
   <a class="btn btn-large btn-block btn-primary btn-success" data-toggle="modal" href="#create" data-target="#create">
     <i class="icon-plus icon-white"></i> Create
   </a>
@@ -15,7 +10,7 @@
 </div>
 <?php if (isset($tags)) : ?>
 <hr/>
-Current User: <?php echo $admin; ?>
+Current User: <?php echo Configuration::get_current_username(); ?>
 <hr/>
 <div class="row-fluid" id="tag_row">
 	<b>Filter by Tags</b>
@@ -42,7 +37,7 @@ Current User: <?php echo $admin; ?>
             $app = \Slim\Slim::getInstance();
             $env = $app->environment;
             $admin = $env['admin']['username'];
-if ($admin != "Not Signed In") {
+if (Configuration::get_current_username() != "Not Signed In") {
     include __DIR__.'/modal/create.php'; 
 }
 ?>

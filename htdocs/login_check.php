@@ -1,6 +1,7 @@
          <?php
-ob_start();
-session_start($_POST['morgue_sid']);
+require_once 'phplib/Configuration.php';
+
+session_start();
 echo "staritng";
 
             $msg = '';
@@ -36,11 +37,11 @@ curl_setopt($ch, CURLOPT_POST, 1);
                curl_close($ch);
                if (isset($result['status'])) {
                   // very basic, allows for status success and MFA_REQUIRED to proceed
-               echo "hello: " . $result['_embedded']['user']['profile']['firstName'] . "." . $result['_embedded']['user']['profile']['lastName'];
+                  echo "hello: " . $result['_embedded']['user']['profile']['firstName'] . "." . $result['_embedded']['user']['profile']['lastName'];
                   $_SESSION['valid'] = true;
                   $_SESSION['timeout'] = time();
                   $_SESSION['username'] = $result['_embedded']['user']['profile']['firstName'] . "." . $result['_embedded']['user']['profile']['lastName'];
-                  echo "all clear!";
+                  Configuration::set_current_username($result['_embedded']['user']['profile']['firstName'] . "." . $result['_embedded']['user']['profile']['lastName']);
                   header("Location: index.php");
                } else {
                   echo 'You have entered invalid use name and password.';
@@ -48,6 +49,5 @@ curl_setopt($ch, CURLOPT_POST, 1);
                   header("Location: /login");
               }
             }
-ob_end_flush();
 
          ?>
