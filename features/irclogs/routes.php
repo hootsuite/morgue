@@ -26,8 +26,14 @@ $app->get('/irclogs', function () use ($app) {
     $end_date = date_create($app->request->get('end_date').$end_time);
     $end_date->setTimezone($tz);
 
-    $room_api_key = "tqQ8F7M6nYHGCsBHjc5ML5sHNid5EGZ3yqK5JCa8";
-    $messages_api_key = '9jPIFnxka9wZ0ddNqzl7kD0DOIQZXtwvkH6KgIqk';
+    $config = Configuration::get_configuration("irclogs");
+
+    if (!$config["hipchat_room_api_key"] || !$config["hipchat_messages_api_key"]) {
+        return;
+    }
+
+    $room_api_key = $config["hipchat_room_api_key"];
+    $messages_api_key = $config["hipchat_messages_api_key"];
     $auth = new OAuth2($messages_api_key);
     $client = new Client($auth);
 
