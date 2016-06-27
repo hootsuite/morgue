@@ -1,4 +1,3 @@
-      <h2>Enter Username and Password</h2> 
       <div class = "container form-signin">
          
          <?php
@@ -48,16 +47,17 @@ curl_setopt($ch, CURLOPT_POST, 1);
 
          ?>
       </div> <!-- /container -->
+      <!-- form from http://www.tutorialspoint.com/php/php_login_example.htm -->
       <div class = "container">
       
          <form class = "form-signin" role = "form" 
             action = "login_check.php" method = "post">
             <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
             <input type = "text" class = "form-control" 
-               name = "morgue_username" placeholder = "username = tutorialspoint" 
+               name = "morgue_username" placeholder = "username" 
                required autofocus></br>
             <input type = "password" class = "form-control"
-               name = "morgue_password" placeholder = "password = 1234" required>
+               name = "morgue_password" placeholder = "password" required>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
                name = "morgue_login">Login</button>
          </form>

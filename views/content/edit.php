@@ -7,19 +7,20 @@
     </div>
 <?php endif; ?>
 
-
-<!-- Edit Status -->
-<div class="row-fluid">
-    <?php if ($edit_status === Postmortem::EDIT_UNLOCKED): ?>
-        <a id="edit_status" href="javascript:void(0)"><div id="edit_div" class="alert alert-info" role="alert">Click here to make changes</div></a>
-    <?php endif; ?>
-    <?php if ($edit_status === Postmortem::EDIT_LOCKED): ?>
-        <div id="edit_status" class="alert alert-danger" role="alert"><strong><?php echo $event["modifier"] ?></strong> is currently editing this page.</div>
-    <?php endif; ?>
-    <?php if ($edit_status === Postmortem::EDIT_CLOSED): ?>
-        <div id="edit_status" class="alert alert-warning" role="alert"><strong>Heads up!</strong> The edit period for this event has expired.</div>
-    <?php endif; ?>
-</div>
+<?php if (Configuration::get_current_username() != 'Not Signed In') { ?>
+    <!-- Edit Status -->
+    <div class="row-fluid">
+	<?php if ($edit_status === Postmortem::EDIT_UNLOCKED): ?>
+            <a id="edit_status" href="javascript:void(0)"><div id="edit_div" class="alert alert-info" role="alert">Click here to make changes</div></a>
+	<?php endif; ?>
+	<?php if ($edit_status === Postmortem::EDIT_LOCKED): ?>
+            <div id="edit_status" class="alert alert-danger" role="alert"><strong><?php echo $event["modifier"] ?></strong> is currently editing this page.</div>
+	<?php endif; ?>
+	<?php if ($edit_status === Postmortem::EDIT_CLOSED): ?>
+            <div id="edit_status" class="alert alert-warning" role="alert"><strong>Heads up!</strong> The edit period for this event has expired.</div>
+	<?php endif; ?>
+    </div>
+<?php } ?>
 
 <div class="row-fluid">
 <div class="offset1 span10">

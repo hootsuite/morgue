@@ -34,9 +34,6 @@ Current User: <?php echo Configuration::get_current_username(); ?>
 </div>
 <?php endif ?>
 <?php 
-            $app = \Slim\Slim::getInstance();
-            $env = $app->environment;
-            $admin = $env['admin']['username'];
 if (Configuration::get_current_username() != "Not Signed In") {
     include __DIR__.'/modal/create.php'; 
 }
