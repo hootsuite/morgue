@@ -54,8 +54,5 @@ $app->get('/irclogs', function () use ($app) {
         }
     }
 
-    array_push($results, array('nick' => $end_date,'time' => $value->getDate(), 'message' => "is apparently true :/"));
-
-
     echo json_encode($results);
 });
