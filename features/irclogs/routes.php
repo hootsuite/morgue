@@ -6,11 +6,6 @@ use GorkaLaucirica\HipchatAPIv2Client\API\RoomAPI;
  * Routes for irclogs
  */
 $app->get('/irclogs', function () use ($app) {
-    // $content = "irclogs/views/irclogs";
-    // $page_title = "irclogs";
-    // $show_sidebar = false;
-
-    // include "views/page.php";
     header("Content-Type: application/json");
     $start_time = $app->request->get('start_time');
     $end_time = $app->request->get('end_time');
@@ -47,15 +42,20 @@ $app->get('/irclogs', function () use ($app) {
     foreach ($roomMessages as &$value) {
         $date_obj = date_create($value->getDate());
         $date_obj->setTimezone($tz);
-        array_push($results, array('nick' => $value->getFrom() . $value->getID(),'time' => $date_obj->format('Y-m-d h:i:s a'), 'message' => $value->getMessage()));
+        array_push($results, array('nick' => $value->getFrom(), 'time' => $date_obj->format('Y-m-d h:i:s a'), 'message' => $value->getMessage()));
         $last_message_id = $value->getID();
     }
 
     $roomMessages = $roomAPI->getRecentHistory($channel, array( 'max-results' => 400, 'not-before' => $last_message_id));
 
     foreach ($roomMessages as &$value) {
-        array_push($results, array('nick' => $value->getFrom(),'time' => $value->getDate(), 'message' => $value->getMessage()));
+        if (strtotime($value->getDate()) <= strtotime($app->request->get('start_date').$start_time)) {
+            array_push($results, array('nick' => $value->getFrom(),'time' => $value->getDate(), 'message' => $value->getMessage()));
+        }
     }
+
+    array_push($results, array('nick' => $end_date,'time' => $value->getDate(), 'message' => "is apparently true :/"));
+
 
     echo json_encode($results);
 });
