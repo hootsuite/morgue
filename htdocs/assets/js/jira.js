@@ -1,3 +1,30 @@
+
+
+
+
+
+
+
+
+
+function createTicket() {
+  var jira_project_name = $("jira_project_name").attr("value");
+  var jira_summary = $("jira_summary").attr("value");
+  var jira_description = $("jira_description").attr("value");
+  var jira_issuetype = $("jira_issuetype").attr("value");
+
+  create_ticket_for_event(get_current_event_id(), jira_project_name,
+			  jira_summary, jira_description, jira_issuetype,
+			  function(data) {
+			    data = JSON.parse(data);
+			    var jira_input = $("#jira_key_input");
+			    var jira_keys = (jira_input.attr("value"));
+			    jira_input.attr("value", data["key"]);
+			    addTicket();
+			  }
+			 )
+}
+
 function addTicket() {
     var jira_input = $("#jira_key_input");
     var jira_keys = (jira_input.attr("value"));
