@@ -13,7 +13,7 @@ $app->get('/irclogs', function () use ($app) {
     $channel = $app->request->get('channel');
     $offset = $app->request->get('offset');
 
-    $tz = new DateTimeZone('America/Los_Angeles');
+    $tz = new DateTimeZone($timezone);
 
     $start_date = date_create($app->request->get('start_date').$start_time);
     $start_date->setTimezone($tz);
@@ -45,12 +45,13 @@ $app->get('/irclogs', function () use ($app) {
         array_push($results, array('nick' => $value->getFrom(), 'time' => $date_obj->format('Y-m-d h:i:s a'), 'message' => $value->getMessage()));
         $last_message_id = $value->getID();
     }
-
     $roomMessages = $roomAPI->getRecentHistory($channel, array( 'max-results' => 400, 'not-before' => $last_message_id));
 
     foreach ($roomMessages as &$value) {
-        if (strtotime($value->getDate()) <= strtotime($app->request->get('start_date').$start_time)) {
-            array_push($results, array('nick' => $value->getFrom(),'time' => $value->getDate(), 'message' => $value->getMessage()));
+        $date_obj = date_create($value->getDate());
+        $date_obj->setTimezone($tz);
+        if ($start_date->format('Y-m-d\TH:i:sP') <= $date_obj->format('Y-m-d\TH:i:sP') && ($end_date->format('Y-m-d\TH:i:sP') >= $date_obj->format('Y-m-d\TH:i:sP'))) {
+            array_push($results, array('nick' => $value->getFrom(),'time' => $date_obj->format('Y-m-d h:i:s a'), 'message' => $value->getMessage()));
         }
     }
 
