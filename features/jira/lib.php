@@ -303,5 +303,30 @@ class JiraClient {
 
         return $ticket;
     }
+
+    /**
+     *
+     *
+     */
+
+    public function createJiraTicket($project, $summary, $description, $issuetype) {
+        $params = array(
+            'fields' => array(
+                'project' => array(
+                    'key' => $project
+                ),
+                'summary' => $summary,
+                'description' => $description,
+                'issuetype' => array(
+                    'name' => $issuetype
+                ),
+                'customfield_13204' => array("value" => "Misc.")
+            )
+        );
+        $response = $this->curl_client->post($this->getJiraBaseUrl(). '/rest/api/2/issue', $params, $this->username . ':' . $this->password, $this->proxy);
+        $jira_api_response = json_decode($response, true);
+
+        return $jira_api_response;
+    }
 }
 ?>
