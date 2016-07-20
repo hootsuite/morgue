@@ -2,10 +2,9 @@
 -- Table structure for table `postmortems`
 --
 
-DROP TABLE IF EXISTS `postmortems`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `postmortems` (
+CREATE TABLE IF NOT EXISTS `postmortems` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `summary` longtext NOT NULL,
@@ -27,16 +26,14 @@ CREATE TABLE `postmortems` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `tags`;
-DROP TABLE IF EXISTS `postmortem_referenced_tags`;
-CREATE TABLE `tags` (
+CREATE TABLE IF NOT EXISTS `tags` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `postmortem_referenced_tags` (
+CREATE TABLE IF NOT EXISTS `postmortem_referenced_tags` (
   `postmortem_id` bigint(20) NOT NULL,
   `tag_id` bigint(20) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
@@ -45,8 +42,7 @@ CREATE TABLE `postmortem_referenced_tags` (
   PRIMARY KEY (`postmortem_id`, `tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `postmortem_history`;
-CREATE TABLE `postmortem_history` (
+CREATE TABLE IF NOT EXISTS `postmortem_history` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `postmortem_id` bigint(20) NOT NULL,
   `auth_username` varchar(128) NOT NULL,
