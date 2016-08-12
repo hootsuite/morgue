@@ -89,6 +89,36 @@ class SlackHandler implements LogsHandler {
     function get_logs($start_date, $end_date, $timezone, $channel) {
 
         $channel_id = $this->get_channel_id($channel);
+        
+        if ($channel_id == "0000") {
+
+            $response = $this->getHandler()->execute('groups.list', []);
+
+            $channel_id = "0000";
+            foreach ($response->getBody()['groups'] as $value) {
+                if ($value["name"] == $channel) {
+                    $channel_id = $value["id"];
+
+                    $response = $this->getHandler()->execute('groups.history', [
+                        'channel' => $channel_id,
+                        'count' => 1000,
+                        'oldest' => $start_date,
+                        'latest' => $end_date
+                    ]);
+
+                    $results = array();
+                    foreach ($response->getBody()['messages'] as $value) {
+                        array_push($results, array(
+                            'nick' => $this->get_username($value['user']),
+                            'time' => date('Y-m-d h:i:s a', $value['ts']),
+                            'message' => $this->sanitize_message($value['text'])
+                        ));
+                    }
+                    return $results;
+
+                }
+            }
+        }        
 
         $response = $this->getHandler()->execute('channels.history', [
             'channel' => $channel_id,
