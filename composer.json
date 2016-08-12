@@ -3,7 +3,7 @@
         "slim/slim": "2.*",
         "twig/twig": "1.*",
          "wikimedia/composer-merge-plugin": "dev-master",
-        "gorkalaucirica/hipchat-v2-api-client": "^1.5"
+         "frlnc/php-slack": "^1.0"
     },
     "extra": {
         "merge-plugin": {

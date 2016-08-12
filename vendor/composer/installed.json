@@ -1,56 +1,5 @@
 [
     {
-        "name": "wikimedia/composer-merge-plugin",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/wikimedia/composer-merge-plugin.git",
-            "reference": "c331be6a311fd776d536337d86ceae8145b9e446"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/wikimedia/composer-merge-plugin/zipball/c331be6a311fd776d536337d86ceae8145b9e446",
-            "reference": "c331be6a311fd776d536337d86ceae8145b9e446",
-            "shasum": ""
-        },
-        "require": {
-            "composer-plugin-api": "^1.0",
-            "php": ">=5.3.2"
-        },
-        "require-dev": {
-            "composer/composer": "1.0.*@dev",
-            "jakub-onderka/php-parallel-lint": "~0.8",
-            "phpunit/phpunit": "~4.8|~5.0",
-            "squizlabs/php_codesniffer": "~2.1.0"
-        },
-        "time": "2016-04-23 00:51:50",
-        "type": "composer-plugin",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.3.x-dev"
-            },
-            "class": "Wikimedia\\Composer\\MergePlugin"
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "Wikimedia\\Composer\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Bryan Davis",
-                "email": "bd808@wikimedia.org"
-            }
-        ],
-        "description": "Composer plugin to merge multiple composer.json files"
-    },
-    {
         "name": "slim/slim",
         "version": "2.6.2",
         "version_normalized": "2.6.2.0",
@@ -162,285 +111,84 @@
         ]
     },
     {
-        "name": "sabre/event",
-        "version": "2.0.2",
-        "version_normalized": "2.0.2.0",
+        "name": "wikimedia/composer-merge-plugin",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
-            "url": "https://github.com/fruux/sabre-event.git",
-            "reference": "337b6f5e10ea6e0b21e22c7e5788dd3883ae73ff"
+            "url": "https://github.com/wikimedia/composer-merge-plugin.git",
+            "reference": "54142e6a68809196b8ad3a20a12208e0bf275388"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fruux/sabre-event/zipball/337b6f5e10ea6e0b21e22c7e5788dd3883ae73ff",
-            "reference": "337b6f5e10ea6e0b21e22c7e5788dd3883ae73ff",
+            "url": "https://api.github.com/repos/wikimedia/composer-merge-plugin/zipball/54142e6a68809196b8ad3a20a12208e0bf275388",
+            "reference": "54142e6a68809196b8ad3a20a12208e0bf275388",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.4.1"
+            "composer-plugin-api": "^1.0",
+            "php": ">=5.3.2"
         },
         "require-dev": {
-            "phpunit/phpunit": "*",
-            "sabre/cs": "~0.0.1"
+            "composer/composer": "~1.0.0",
+            "jakub-onderka/php-parallel-lint": "~0.8",
+            "phpunit/phpunit": "~4.8|~5.0",
+            "squizlabs/php_codesniffer": "~2.1.0"
         },
-        "time": "2015-05-19 10:24:22",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Sabre\\Event\\": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Evert Pot",
-                "email": "me@evertpot.com",
-                "homepage": "http://evertpot.com/",
-                "role": "Developer"
-            }
-        ],
-        "description": "sabre/event is a library for lightweight event-based programming",
-        "homepage": "http://sabre.io/event/",
-        "keywords": [
-            "EventEmitter",
-            "events",
-            "hooks",
-            "plugin",
-            "promise",
-            "signal"
-        ]
-    },
-    {
-        "name": "sabre/http",
-        "version": "3.0.5",
-        "version_normalized": "3.0.5.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fruux/sabre-http.git",
-            "reference": "6b06c03376219b3d608e1f878514ec105ed1b577"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fruux/sabre-http/zipball/6b06c03376219b3d608e1f878514ec105ed1b577",
-            "reference": "6b06c03376219b3d608e1f878514ec105ed1b577",
-            "shasum": ""
-        },
-        "require": {
-            "ext-mbstring": "*",
-            "php": ">=5.4",
-            "sabre/event": ">=1.0.0,<3.0.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.3",
-            "squizlabs/php_codesniffer": "~1.5.3"
-        },
-        "suggest": {
-            "ext-curl": " to make http requests with the Client class"
-        },
-        "time": "2015-05-11 15:25:57",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Sabre\\HTTP\\": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Evert Pot",
-                "email": "me@evertpot.com",
-                "homepage": "http://evertpot.com/",
-                "role": "Developer"
-            }
-        ],
-        "description": "The sabre/http library provides utilities for dealing with http requests and responses. ",
-        "homepage": "https://github.com/fruux/sabre-http",
-        "keywords": [
-            "http"
-        ]
-    },
-    {
-        "name": "sabre/vobject",
-        "version": "3.5.2",
-        "version_normalized": "3.5.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fruux/sabre-vobject.git",
-            "reference": "b7d6005b9f8e18bfe2b953d9847df0b3e4098441"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/b7d6005b9f8e18bfe2b953d9847df0b3e4098441",
-            "reference": "b7d6005b9f8e18bfe2b953d9847df0b3e4098441",
-            "shasum": ""
-        },
-        "require": {
-            "ext-mbstring": "*",
-            "php": ">=5.3.1"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "*",
-            "squizlabs/php_codesniffer": "*"
-        },
-        "time": "2016-04-24 07:05:24",
-        "bin": [
-            "bin/vobject",
-            "bin/generate_vcards"
-        ],
-        "type": "library",
+        "time": "2016-07-14 21:29:36",
+        "type": "composer-plugin",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.2.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Sabre\\VObject\\": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Evert Pot",
-                "email": "me@evertpot.com",
-                "homepage": "http://evertpot.com/",
-                "role": "Developer"
+                "dev-master": "1.3.x-dev"
             },
+            "class": "Wikimedia\\Composer\\MergePlugin"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Wikimedia\\Composer\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
             {
-                "name": "Dominik Tobschall",
-                "email": "dominik@fruux.com",
-                "homepage": "http://tobschall.de/",
-                "role": "Developer"
+                "name": "Bryan Davis",
+                "email": "bd808@wikimedia.org"
             }
         ],
-        "description": "The VObject library for PHP allows you to easily parse and manipulate iCalendar and vCard objects",
-        "homepage": "http://sabre.io/vobject/",
-        "keywords": [
-            "VObject",
-            "iCalendar",
-            "jCal",
-            "jCard",
-            "vCard"
-        ]
+        "description": "Composer plugin to merge multiple composer.json files"
     },
     {
-        "name": "sabre/dav",
-        "version": "2.1.10",
-        "version_normalized": "2.1.10.0",
+        "name": "frlnc/php-slack",
+        "version": "1.0.3",
+        "version_normalized": "1.0.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/fruux/sabre-dav.git",
-            "reference": "9f8c1939a3f66eb7170489fc48579ffd1461af62"
+            "url": "https://github.com/Frlnc/php-slack.git",
+            "reference": "07797663e8799407675d473d9153b260dd0fb023"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fruux/sabre-dav/zipball/9f8c1939a3f66eb7170489fc48579ffd1461af62",
-            "reference": "9f8c1939a3f66eb7170489fc48579ffd1461af62",
+            "url": "https://api.github.com/repos/Frlnc/php-slack/zipball/07797663e8799407675d473d9153b260dd0fb023",
+            "reference": "07797663e8799407675d473d9153b260dd0fb023",
             "shasum": ""
         },
         "require": {
-            "ext-ctype": "*",
-            "ext-date": "*",
-            "ext-dom": "*",
-            "ext-iconv": "*",
-            "ext-libxml": "*",
-            "ext-mbstring": "*",
-            "ext-pcre": "*",
-            "ext-simplexml": "*",
-            "ext-spl": "*",
-            "php": ">=5.4.1",
-            "sabre/event": "^2.0.0",
-            "sabre/http": "^3.0.0",
-            "sabre/vobject": "^3.3.4"
+            "php": ">=5.4.0"
         },
         "require-dev": {
-            "evert/phpdoc-md": "~0.1.0",
-            "phpunit/phpunit": "~4.2",
-            "squizlabs/php_codesniffer": "~1.5.3"
+            "mockery/mockery": "~0.9",
+            "phpunit/phpunit": "~4.0"
         },
-        "suggest": {
-            "ext-curl": "*",
-            "ext-pdo": "*"
-        },
-        "time": "2016-03-10 20:49:48",
-        "bin": [
-            "bin/sabredav",
-            "bin/naturalselection"
-        ],
+        "time": "2016-04-10 18:57:50",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Sabre\\DAV\\": "lib/DAV/",
-                "Sabre\\DAVACL\\": "lib/DAVACL/",
-                "Sabre\\CalDAV\\": "lib/CalDAV/",
-                "Sabre\\CardDAV\\": "lib/CardDAV/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Evert Pot",
-                "email": "me@evertpot.com",
-                "homepage": "http://evertpot.com/",
-                "role": "Developer"
-            }
-        ],
-        "description": "WebDAV Framework for PHP",
-        "homepage": "http://sabre.io/",
-        "keywords": [
-            "CalDAV",
-            "CardDAV",
-            "WebDAV",
-            "framework",
-            "iCalendar"
-        ]
-    },
-    {
-        "name": "kriswallsmith/buzz",
-        "version": "v0.10",
-        "version_normalized": "0.10.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kriswallsmith/Buzz.git",
-            "reference": "759432d66387e3433d3b06cb6f773b97225b9b17"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/759432d66387e3433d3b06cb6f773b97225b9b17",
-            "reference": "759432d66387e3433d3b06cb6f773b97225b9b17",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "3.7.*"
-        },
-        "suggest": {
-            "ext-curl": "*"
-        },
-        "time": "2013-05-19 03:41:15",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Buzz": "lib/"
+                "Frlnc\\Slack\\": "src/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -449,69 +197,13 @@
         ],
         "authors": [
             {
-                "name": "Kris Wallsmith",
-                "email": "kris.wallsmith@gmail.com",
-                "homepage": "http://kriswallsmith.net/"
+                "name": "Connor Parks",
+                "email": "connor@connorvg.tv"
             }
         ],
-        "description": "Lightweight HTTP client",
-        "homepage": "https://github.com/kriswallsmith/Buzz",
+        "description": "A lightweight PHP implementation of Slack's API.",
         "keywords": [
-            "curl",
-            "http client"
-        ]
-    },
-    {
-        "name": "gorkalaucirica/hipchat-v2-api-client",
-        "version": "v1.5.1",
-        "version_normalized": "1.5.1.0",
-        "target-dir": "GorkaLaucirica/HipchatAPIv2Client",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/gorkalaucirica/HipchatAPIv2Client.git",
-            "reference": "045521cd01aba26cdf304010bc3f66dc4f9fd37c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/gorkalaucirica/HipchatAPIv2Client/zipball/045521cd01aba26cdf304010bc3f66dc4f9fd37c",
-            "reference": "045521cd01aba26cdf304010bc3f66dc4f9fd37c",
-            "shasum": ""
-        },
-        "require": {
-            "kriswallsmith/buzz": "0.10",
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "henrikbjorn/phpspec-code-coverage": "1.0.*@dev",
-            "phpspec/phpspec": "2.0.*@dev"
-        },
-        "time": "2016-04-30 11:45:31",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "GorkaLaucirica\\HipchatAPIv2Client": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Gorka Laucirica",
-                "email": "gorka.lauzirika@gmail.com",
-                "homepage": "http://gorkalaucirica.net/"
-            }
-        ],
-        "description": "Hipchat v2 API client",
-        "homepage": "https://github.com/gorkalaucirica/HipchatAPIv2Client",
-        "keywords": [
-            "api",
-            "client",
-            "hipchat",
-            "library",
-            "v2"
+            "slack"
         ]
     }
 ]

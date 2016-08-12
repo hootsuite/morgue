@@ -1,0 +1,5 @@
+{
+    "require": {
+        "frlnc/php-slack": "^1.0"
+    }
+}

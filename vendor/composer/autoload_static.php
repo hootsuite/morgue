@@ -11,15 +11,9 @@ class ComposerStaticInit3b2f1df87494d8b9311b08c9c5d1c618
         array (
             'Wikimedia\\Composer\\' => 19,
         ),
-        'S' => 
+        'F' => 
         array (
-            'Sabre\\VObject\\' => 14,
-            'Sabre\\HTTP\\' => 11,
-            'Sabre\\Event\\' => 12,
-            'Sabre\\DAV\\' => 10,
-            'Sabre\\DAVACL\\' => 13,
-            'Sabre\\CardDAV\\' => 14,
-            'Sabre\\CalDAV\\' => 13,
+            'Frlnc\\Slack\\' => 12,
         ),
     );
 
@@ -28,33 +22,9 @@ class ComposerStaticInit3b2f1df87494d8b9311b08c9c5d1c618
         array (
             0 => __DIR__ . '/..' . '/wikimedia/composer-merge-plugin/src',
         ),
-        'Sabre\\VObject\\' => 
+        'Frlnc\\Slack\\' => 
         array (
-            0 => __DIR__ . '/..' . '/sabre/vobject/lib',
-        ),
-        'Sabre\\HTTP\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sabre/http/lib',
-        ),
-        'Sabre\\Event\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sabre/event/lib',
-        ),
-        'Sabre\\DAV\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sabre/dav/lib/DAV',
-        ),
-        'Sabre\\DAVACL\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sabre/dav/lib/DAVACL',
-        ),
-        'Sabre\\CardDAV\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sabre/dav/lib/CardDAV',
-        ),
-        'Sabre\\CalDAV\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sabre/dav/lib/CalDAV',
+            0 => __DIR__ . '/..' . '/frlnc/php-slack/src',
         ),
     );
 
@@ -71,20 +41,6 @@ class ComposerStaticInit3b2f1df87494d8b9311b08c9c5d1c618
             'Slim' => 
             array (
                 0 => __DIR__ . '/..' . '/slim/slim',
-            ),
-        ),
-        'G' => 
-        array (
-            'GorkaLaucirica\\HipchatAPIv2Client' => 
-            array (
-                0 => __DIR__ . '/..' . '/gorkalaucirica/hipchat-v2-api-client',
-            ),
-        ),
-        'B' => 
-        array (
-            'Buzz' => 
-            array (
-                0 => __DIR__ . '/..' . '/kriswallsmith/buzz/lib',
             ),
         ),
     );
