@@ -85,6 +85,25 @@ class SlackHandler implements LogsHandler {
         }
         return $message;
     }
+    
+    function format_messages($response) {
+        $results = array();
+        foreach ($response->getBody()['messages'] as $value) {
+            if (is_null($this->get_username($value['user']))) {
+                $username = $value['username'];
+                $message = $value['attachments'][0]['fallback'];
+            } else {
+                $username = $this->get_username($value['user']);
+                $message = $this->sanitize_message($value['text']);
+            }
+            array_push($results, array(
+                'nick' => $username,
+                'time' => date('Y-m-d h:i:s a', $value['ts']),
+                'message' => $message
+            ));
+        }
+        return $results;
+    }
 
     function get_logs($start_date, $end_date, $timezone, $channel) {
 
@@ -106,16 +125,7 @@ class SlackHandler implements LogsHandler {
                         'latest' => $end_date
                     ]);
 
-                    $results = array();
-                    foreach ($response->getBody()['messages'] as $value) {
-                        array_push($results, array(
-                            'nick' => $this->get_username($value['user']),
-                            'time' => date('Y-m-d h:i:s a', $value['ts']),
-                            'message' => $this->sanitize_message($value['text'])
-                        ));
-                    }
-                    return $results;
-
+                    return $this->format_messages($response);
                 }
             }
         }        
@@ -127,15 +137,7 @@ class SlackHandler implements LogsHandler {
             'latest' => $end_date
         ]);
 
-        $results = array();
-        foreach ($response->getBody()['messages'] as $value) {
-            array_push($results, array(
-                'nick' => $this->get_username($value['user']),
-                'time' => date('Y-m-d h:i:s a', $value['ts']),
-                'message' => $this->sanitize_message($value['text'])
-            ));
-        }
-        return $results;
+        return $this->format_messages($response);
     }
 
 }
