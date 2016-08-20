@@ -21,6 +21,7 @@ class Persistence {
      *                    - title => the title of the event
      *                    - summary => the summary of the post mortem
      *                    - why_surprised => why were we surprised
+     *                    - five_whys => 5 whys for the outage
      *                    - starttime => start time as unix timestamp
      *                    - endtime   => end time as unix timestamp
      *                    - statustime => status time as unix timestamp
@@ -51,6 +52,10 @@ class Persistence {
                 if( isset($postmortem['why_surprised']) ) {
                     $sql.= ",why_surprised=:why_surprised";
                     array_push($values,"why_surprised");
+                }
+                if( isset($postmortem['five_whys']) ) {
+                    $sql.= ",five_whys=:five_whys";
+                    array_push($values,"five_whys");
                 }
                 if( isset($postmortem['starttime']) ) {
                     $sql.= ",starttime=:starttime";
@@ -88,10 +93,10 @@ class Persistence {
 
 
             } else {
-                array_push($values, "summary", "why_surprised", "starttime", "endtime", "statustime", "detecttime", "severity", "created");
+                array_push($values, "summary", "why_surprised", "five_whys", "starttime", "endtime", "statustime", "detecttime", "severity", "created");
 
-                $sql = "INSERT INTO postmortems (title,summary,why_surprised,starttime,endtime,
-                    statustime,detecttime,severity,created) VALUES (:title, :summary,:why_surprised,:starttime,
+                $sql = "INSERT INTO postmortems (title,summary,why_surprised,five_whys,starttime,endtime,
+                    statustime,detecttime,severity,created) VALUES (:title, :summary,:why_surprised,:five_whys,:starttime,
                     :endtime,:statustime,:detecttime,:severity,:created)";
             }
             $stmt = $conn->prepare($sql);
@@ -120,7 +125,7 @@ class Persistence {
         $conn = $conn ?: Persistence::get_database_object();
 
         try {
-            $sql = "SELECT id, title, summary, why_surprised, starttime, endtime, statustime,
+            $sql = "SELECT id, title, summary, why_surprised, five_whys, starttime, endtime, statustime,
                     detecttime,severity, contact, gcal, created, modified, modifier, deleted 
                     FROM postmortems WHERE id = :id LIMIT 1";
             $stmt = $conn->prepare($sql);
