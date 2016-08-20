@@ -13,9 +13,11 @@ $app->get('/irclogs', function () use ($app) {
 
     $tz = new DateTimeZone($timezone);
     $start_date = date_create($app->request->get('start_date').$start_time);
+    $start_date->modify('-5 minutes');
     $start_date->setTimezone($tz);
 
     $end_date = date_create($app->request->get('end_date').$end_time);
+    $end_date->modify('+5 minutes');
     $end_date->setTimezone($tz);
 
     $irclogsClass = new IrclogsClass(new SlackHandler());
