@@ -231,11 +231,20 @@ function update_contact_for_event() {
             type: "PUT",
             success: function () { 
                 show_save_status("Contact", true);
-                update_contact_div(contact);
             },
             error: function () { show_save_status("Contact", false);}
     });
   }
+}
+
+function edit_people_involved() {
+  $("#contact").removeAttr("readonly");
+}
+
+
+function save_people_involved() {
+  $("#contact").attr("readonly", "readonly");
+  update_contact_for_event();
 }
 
 function update_contact_div(contact) {
