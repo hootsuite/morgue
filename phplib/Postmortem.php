@@ -558,8 +558,8 @@ class Postmortem {
         }
         $now = new DateTime(null, new DateTimeZone('UTC'));
         $sql = "INSERT INTO postmortem_history
-                   (postmortem_id, auth_username, action, create_date, summary, why_surprised)
-                   VALUES (:pid, :admin, :action, :date, :summary, :why_surprised)";
+                   (postmortem_id, auth_username, action, create_date, summary, why_surprised, five_whys)
+                   VALUES (:pid, :admin, :action, :date, :summary, :why_surprised, :five_whys)";
         try {
             $stmt = $conn->prepare($sql);
             $stmt->execute(array(
@@ -568,7 +568,8 @@ class Postmortem {
                 "action" => $action,
                 "date" => $now->getTimestamp(),
                 "summary" => $event['summary'],
-                "why_surprised" => $event['why_surprised']
+                "why_surprised" => $event['why_surprised'],
+                "five_whys" => $event['five_whys']
             ));
         } catch (PDOException $e) {
             return array("status" => Postmortem::ERROR, "error" => $e->getMessage());

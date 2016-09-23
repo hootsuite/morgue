@@ -195,6 +195,7 @@ $app->post('/events', function () use ($app) {
         "title" => $title,
         "summary" => "",
         "why_surprised" => "",
+        "five_whys" => "",
         "starttime" => $startdate->getTimeStamp(),
         "endtime" => $enddate->getTimeStamp(),
         "statustime" => $statusdate->getTimeStamp(),
@@ -227,6 +228,7 @@ $app->get('/events/:id', function($id) use ($app) {
     $contact = $event["contact"];
     $summary = $event["summary"];
     $why_surprised = $event["why_surprised"];
+    $five_whys = $event["five_whys"];
 
     $tz = new DateTimeZone($timezone);
     $start_datetime = new DateTime("@$starttime");
@@ -324,6 +326,9 @@ $app->put('/events/:id', function ($id) use ($app) {
             break;
         case "why_surprised":
             $event["why_surprised"] = $value;
+            break;
+        case "five_whys":
+            $event["five_whys"] = $value;
             break;
         case "start_date":
         case "start_time":
@@ -426,7 +431,8 @@ $app->post('/events/:id/history', function($id) use ($app) {
     $event = array(
         "id" => $id,
         "summary" => $app->request->post('summary'),
-        "why_surprised" => $app->request->post('why_surprised')
+        "why_surprised" => $app->request->post('why_surprised'),
+        "five_whys" => $app->request->post('five_whys')
     );
 
     // store history
