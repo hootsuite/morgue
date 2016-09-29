@@ -662,4 +662,18 @@ class Postmortem {
             return array('default');
         }
     }
+
+    /**
+      * Provide the different outage reasosn for a post mortem event
+      *
+      * @returns array of outage reasons and there examples
+      */
+    static function get_outage_reasons() {
+        $config = Configuration::get_configuration();
+        if (isset($config['reasons']) && isset($config['reasons']['options'])) {
+            return $config['reasons']['options'];
+        } else {
+            return array('title' => 'Other', 'desc' => '(Anything else)');
+        }
+    }
 }

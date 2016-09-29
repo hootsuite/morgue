@@ -78,8 +78,22 @@
           </select>
         </div>
       </div>
-
+      <div class="control-group">
+        <label class="control-label">Outage Reason: </label>
+        <div class="controls controls-row">
+          <select id="reason-select" name="reason" class="input-medium", title="Outage Reaons">
+            <?php
+              $outage_reasons = Postmortem::get_outage_reasons();
+              echo "<option value='null'>----</option>";
+              foreach ($outage_reasons as $outage_reason) {
+                echo '<option value="' . $outage_reason["title"] . '" description="' . $outage_reason["desc"] . '">' . $outage_reason["title"]  .  '</option>';
+              }
+            ?>
+          </select>
+        </div>
+      </div>
     <span id="titleinfo"> Title has to contain at least 3 characters </span>
+    <span id="titleinfo"> A Reason must be selected for each postmortem </span>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -94,9 +108,11 @@
 <script type="text/javascript" src="/assets/js/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="/assets/js/bootstrap-popover.js"></script>
 <script type="text/javascript" src="/assets/js/severity_tooltip.js"></script>
+<script type="text/javascript" src="/assets/js/reasons_tooltip.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-
+    var titleValid = false;
+    var reasonValid = false;
     $('.datepicker')
       .val($.datepicker.formatDate('mm/dd/yy', new Date()))
       .datepicker({
@@ -113,10 +129,21 @@ $(document).ready(function () {
     $("#eventcreatebtn").attr("disabled", "true");
     $("#title").blur(function() {
         if ($("#title").attr("value").length > 2) {
-            $("#eventcreatebtn").removeAttr("disabled");
+            titleValid = true;
         } else {
-            $("#eventcreatebtn").attr("disabled", "true");
+            titleValid = false;
         }
+        checkValid();
+    });
+
+    $("#reason-select").on("change", function() {
+        var reason = $("#reason-select option:selected").val();
+        if (reason != 'null') {
+           reasonValid = true;
+        } else {
+           reasonValid = false;
+        }
+        checkValid();
     });
 
     $('#add-status').on('click', function() {
@@ -134,6 +161,14 @@ $(document).ready(function () {
         $fields.addClass('hidden').prev().removeClass('hidden');
         $fields.find('input').val('');
     });
+
+    function checkValid() {
+        if(titleValid && reasonValid) {
+            $("#eventcreatebtn").removeAttr("disabled");
+        } else {
+          $("#eventcreatebtn").attr("disabled", "true");
+        }
+    }
 });
 
 </script>

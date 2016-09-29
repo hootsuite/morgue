@@ -9,6 +9,7 @@ var edit_lock;
 $("#add-status").on("click", show_status_fields);
 $("#clear-status").on("click", remove_status_fields);
 $("#severity-select").on("save", update_severity_for_event);
+$("#reason-select").on("save", update_reason_for_event);
 $("#event-detect-input-date").on("save", update_detectdate_for_event);
 $("#event-detect-input-time").on("save", update_detecttime_for_event);
 $("#event-status-input-time").on("save", update_statusdatetime_for_event);

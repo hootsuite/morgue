@@ -138,6 +138,24 @@
           disabled/>
     </div>
    </div>
+
+   <div class="control-group">
+    <label class="control-label">Outage Reason: </label>
+    <div class="controls controls-row">
+      <select id="reason-select" name="reason" class="input editable", title="Outage Reaons" disabled>
+        <?php
+          $outage_reasons = Postmortem::get_outage_reasons();
+          foreach ($outage_reasons as $outage_reason) {
+            echo '<option value="' . $outage_reason["title"] . '" description="' . $outage_reason["desc"] . '"';
+            if ($outage_reason['title'] == $reason) {
+              echo 'selected="true"';
+            }
+            echo '>' . $outage_reason["title"]  .  '</option>';
+          }
+        ?>
+      </select>
+    </div>
+   </div>
   </div>
 </form>
 </div>
@@ -205,6 +223,7 @@
 <script type="text/javascript" src="/assets/js/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="/assets/js/bootstrap-popover.js"></script>
 <script type="text/javascript" src="/assets/js/severity_tooltip.js"></script>
+<script type="text/javascript" src="/assets/js/reasons_tooltip.js"></script>
 <script type="text/javascript" src="/assets/js/forums.js"></script>
 <script type="text/javascript" src="/assets/js/edit.js"></script>
 <?php

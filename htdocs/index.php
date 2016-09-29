@@ -181,6 +181,7 @@ $app->post('/events', function () use ($app) {
     $status_time = $app->request->post('status_time');
     $timezone = $app->request->post('timezone');
     $severity = $app->request->post('severity');
+    $reason = $app->request->post('reason');
     $startdate = new DateTime($start_date." ".$start_time, new DateTimeZone($timezone));
     $enddate = new DateTime($end_date." ".$end_time, new DateTimeZone($timezone));
     $detectdate = new DateTime($detect_date." ".$detect_time, new DateTimeZone($timezone));
@@ -200,7 +201,8 @@ $app->post('/events', function () use ($app) {
         "endtime" => $enddate->getTimeStamp(),
         "statustime" => $statusdate->getTimeStamp(),
         "detecttime" => $detectdate->getTimeStamp(),
-        "severity" => $severity
+        "severity" => $severity,
+        "reason" => $reason
     );
 
     $event = Postmortem::save_event($event);
@@ -210,6 +212,7 @@ $app->post('/events', function () use ($app) {
 $app->get('/events/:id', function($id) use ($app) {
 
     $event = Postmortem::get_event($id);
+    $app->log->error(json_encode($event));
     if (is_null($event["id"])) {
         echo "loooool";
         $app->response->status(404);
@@ -224,6 +227,7 @@ $app->get('/events/:id', function($id) use ($app) {
     $status_time = $event["statustime"];
     $timezone = getUserTimezone();
     $severity = $event["severity"];
+    $reason = $event["reason"];
     $gcal = $event["gcal"];
     $contact = $event["contact"];
     $summary = $event["summary"];
@@ -411,6 +415,9 @@ $app->put('/events/:id', function ($id) use ($app) {
             break;
         case "gcal":
             $event["gcal"] = $value;
+            break;
+        case "reason":
+            $event["reason"] = $value;
             break;
         }
     }
