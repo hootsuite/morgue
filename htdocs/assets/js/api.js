@@ -273,6 +273,13 @@ function update_severity_for_event(e, event, history) {
   });
 }
 
+function update_reason_for_event(e, event, history) {
+  $("select#reason-select option:selected").each(function () {
+      event.reason = $.trim($(this).val());
+      console.log(event.reason);
+  });
+}
+
 function update_detectdate_for_event(e, event, history) {
     event.detect_date = $("input#event-detect-input-date").val();
     event.timezone = $('#current_tz').text();

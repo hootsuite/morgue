@@ -85,19 +85,22 @@ class Persistence {
                     $sql.= ",statustime=:statustime";
                     array_push($values,"statustime");
                 }
+                if ( isset( $postmortem['reason'] ) ){
+                    $sql.= ",reason=:reason";
+                    array_push($values,"reason");
+                }
                 if ( isset( $postmortem['created'] ) ){
                     $sql.= ",created=:created";
                     array_push($values, "created");
                 }
                 $sql.=" WHERE id=:id LIMIT 1";
 
-
             } else {
-                array_push($values, "summary", "why_surprised", "five_whys", "starttime", "endtime", "statustime", "detecttime", "severity", "created");
+                array_push($values, "summary", "why_surprised", "five_whys", "starttime", "endtime", "statustime", "detecttime", "severity", "reason", "created");
 
                 $sql = "INSERT INTO postmortems (title,summary,why_surprised,five_whys,starttime,endtime,
-                    statustime,detecttime,severity,created) VALUES (:title, :summary,:why_surprised,:five_whys,:starttime,
-                    :endtime,:statustime,:detecttime,:severity,:created)";
+                    statustime,detecttime,severity,reason,created) VALUES (:title, :summary,:why_surprised,:five_whys,:starttime,
+                    :endtime,:statustime,:detecttime,:severity,:reason,:created)";
             }
             $stmt = $conn->prepare($sql);
             $stmt->execute(array_intersect_key($postmortem, array_flip($values)));
@@ -126,8 +129,8 @@ class Persistence {
 
         try {
             $sql = "SELECT id, title, summary, why_surprised, five_whys, starttime, endtime, statustime,
-                    detecttime,severity, contact, gcal, created, modified, modifier, deleted 
-                    FROM postmortems WHERE id = :id LIMIT 1";
+                    detecttime,severity, contact, gcal, created, modified, modifier, deleted,
+                    reason FROM postmortems WHERE id = :id LIMIT 1";
             $stmt = $conn->prepare($sql);
             $stmt->execute(array('id' => $postmortem_id));
             $postmortem = $stmt->fetch(PDO::FETCH_ASSOC);
