@@ -9,11 +9,17 @@
   \/_/  \/_/\/_____/\/_/ /_/\/_____/\/_____/\/_____/ ,.||,.,,.,.|,.</a></div>
         <div>
       <ul class="nav">
-<?php foreach (Configuration::get_navbar_features() as $navbar_feature) { 
+<?php 
+  $username = Configuration::get_current_username();
+  foreach (Configuration::get_navbar_features() as $navbar_feature) { 
 /*
  * For each feature that declares navbar, we will draw a link in the navbar.
  * If the feature defines custom_js_assets we will load the script here too.
- */ ?>
+ */ 
+  if ($username != "Not Signed In" && $navbar_feature['name'] == "login") continue;
+  if ($username == "Not Signed In" && $navbar_feature['name'] == "logout") continue;
+  ?>
+
 		<li class="<?php echo $navbar_feature['name'] ?>">
 			<a  class="nav_link" href="<?php echo ($content === '/'.$navbar_feature['name']) ? '#' : '/'.$navbar_feature['name'] ?>"><?php echo ucfirst($navbar_feature['name']) ?></a><?php
 			if (isset($navbar_feature['custom_js_assets'])) {
