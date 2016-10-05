@@ -12,6 +12,8 @@ $("#severity-select").on("save", update_severity_for_event);
 $("#reason-select").on("save", update_reason_for_event);
 $("#event-detect-input-date").on("save", update_detectdate_for_event);
 $("#event-detect-input-time").on("save", update_detecttime_for_event);
+$("#event-diagnosed-input-date").on("save", update_diagnoseddate_for_event);
+$("#event-diagnosed-input-time").on("save", update_diagnosedtime_for_event);
 $("#event-status-input-time").on("save", update_statusdatetime_for_event);
 $("#event-end-input-date").on("save", update_enddate_for_event);
 $("#event-end-input-time").on("save", update_endtime_for_event);

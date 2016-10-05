@@ -33,6 +33,13 @@
         </div>
       </div>
       <div class="control-group">
+        <label class="control-label" for="diagnosed_date">Diagnosed Time</label>
+        <div class="controls controls-row">
+          <input id="diagnosed_date" name="diagnosed_date" class="input-small datepicker" type="text">
+          <input id="diagnosed_time" name="diagnosed_time" class="input-mini timeentry" type="text">
+        </div>
+      </div>
+      <div class="control-group">
         <label class="control-label" for="status_date">Status Time</label>
         <div class="controls controls-row">
           <div class=""><a href="#" id="add-status" role="button" class="btn">Add</a></div>

@@ -293,6 +293,18 @@ function update_detecttime_for_event(e, event, history) {
     update_resolve_time();
 }
 
+function update_diagnoseddate_for_event(e, event, history) {
+    event.diagnosed_date = $("input#event-diagnosed-input-date").val();
+    event.timezone = $('#current_tz').text();
+}
+
+function update_diagnosedtime_for_event(e, event, history) {
+    event.diagnosed_time = $("input#event-diagnosed-input-time").val();
+    event.timezone = $('#current_tz').text();
+
+    update_undiagnosed_time();
+}
+
 function update_statusdatetime_for_event(e, event, history) {
 
     var status =  $("input#event-status-input-date").val() + ' ' + $("input#event-status-input-time").val();
@@ -327,6 +339,7 @@ function update_starttime_for_event(e, event, history) {
 
     update_impact_time();
     update_undetected_time();
+    update_undiagnosed_time();
 }
 
 function update_impact_time() {
@@ -367,6 +380,20 @@ function update_resolve_time() {
   enddate.setMinutes(endtime.getMinutes());
 
   $('#resolvetime').val(getTimeString(enddate - startdate));
+}
+
+function update_undiagnosed_time() {
+  var startdate = new Date($("input#event-start-input-date").val());
+  var starttime = timeToDate($("input#event-start-input-time").val());
+  var enddate = new Date($("input#event-diagnosed-input-date").val());
+  var endtime = timeToDate($("input#event-diagnosed-input-time").val());
+
+  startdate.setHours(starttime.getHours());
+  startdate.setMinutes(starttime.getMinutes());
+  enddate.setHours(endtime.getHours());
+  enddate.setMinutes(endtime.getMinutes());
+
+  $('#undiagnosedtime').val(getTimeString(enddate - startdate));
 }
 
 function update_history(history) {
