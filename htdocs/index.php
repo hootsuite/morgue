@@ -233,6 +233,11 @@ $app->get('/events/:id', function($id) use ($app) {
     $summary = $event["summary"];
     $why_surprised = $event["why_surprised"];
     $five_whys = $event["five_whys"];
+    $diagnosed_time = $event["diagnosedtime"];
+    // Default the diagnosed time to the detect time for old entries
+    if ($diagnosed_time == 0) {
+        $diagnosed_time = $detect_time;
+    }
 
     $tz = new DateTimeZone($timezone);
     $start_datetime = new DateTime("@$starttime");
@@ -247,8 +252,11 @@ $app->get('/events/:id', function($id) use ($app) {
     }
     $detect_datetime = new DateTime("@$detect_time");
     $detect_datetime->setTimezone($tz);
+    $diagnosed_datetime = new DateTime("@$diagnosed_time");
+    $diagnosed_datetime->setTimezone($tz);
     $impacttime = getTimeString($endtime - $starttime);
     $resolvetime = getTimeString($endtime - $detect_time);
+    $undiagnosedtime = getTimeString($diagnosed_time - $starttime);
     $undetecttime = getTimeString($detect_time - $starttime);
 
     $edit_status = Postmortem::get_event_edit_status($event);

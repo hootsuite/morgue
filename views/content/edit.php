@@ -69,6 +69,18 @@
     </div>
 
     <div class="control-group">
+      <label class="control-label" id="event-diagnosed-time">Diagnosed time: </label>
+      <div class="controls controls-row">
+        <input id="event-diagnosed-input-date" name="event-diagnosed-input-date"
+               class="input-small datepicker editable" type="text"
+               value="<?php echo $diagnosed_datetime->format('m/d/Y'); ?>" disabled>
+        <input id="event-diagnosed-input-time" name="event-diagnosed-input-time"
+               class="input-mini timeentry editable" type="text"
+               value="<?php echo $diagnosed_datetime->format('g:iA'); ?>" disabled>
+      </div>
+    </div>
+
+    <div class="control-group">
       <label class="control-label" id="event-detect-time">Detect time: </label>
       <div class="controls controls-row">
         <input id="event-detect-input-date" name="event-detect-input-date"
@@ -126,6 +138,15 @@
       <div class="controls controls-row">
         <input class="input-medium" id="undetecttime" type="text"
           value="<?php echo $undetecttime; ?>"
+          disabled/>
+      </div>
+   </div>
+
+   <div class="control-group">
+      <label class="control-label" id="time_undiagnosed">Time undiagnosed: </label>
+      <div class="controls controls-row">
+        <input class="input-medium" id="undiagnosedtime" type="text"
+          value="<?php echo $undiagnosedtime; ?>"
           disabled/>
       </div>
    </div>
