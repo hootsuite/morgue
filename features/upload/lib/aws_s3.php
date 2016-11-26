@@ -2,20 +2,6 @@
 
 use Sabre\DAV\Client;
 include 'vendor/autoload.php';
-/*
- * Wraps and adapts Sabre webdav client to our use.
- * By design all files will be uploaded to a directory
- * named the same as the username.
- * In that directory we will attempt to create a directory
- * named for the event_id (some number) and images
- * associated with that event will be placed in that directory.
- *
- * Example.  Username: morgue
- *           Event ID: 13
- *           upload file name: a_graph.png
- * will attempt to MKCOL /morgue/13
- * and then PUT our file into /morgue/13/a_graph.png
- */
 class Uploader_AWS_S3 {
 
     // Where the files will be source from
