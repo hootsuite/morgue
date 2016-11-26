@@ -3,7 +3,8 @@
         "slim/slim": "2.*",
         "twig/twig": "1.*",
          "wikimedia/composer-merge-plugin": "dev-master",
-         "frlnc/php-slack": "^1.0"
+         "frlnc/php-slack": "^1.0",
+        "aws/aws-sdk-php": "^3.19"
     },
     "extra": {
         "merge-plugin": {

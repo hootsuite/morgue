@@ -10,6 +10,7 @@ $(function() {
   });
 
   myDropzone.on("success", function (d, e) {
+    console.log("we got this " + e); 
     var url = JSON.parse(e).location;
     console.log("dropzone success with " + url); 
     var img_input = $("#image_url")[0];

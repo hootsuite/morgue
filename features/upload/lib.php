@@ -2,19 +2,17 @@
 
 class Uploader {
 
-    public $default_uploader_type = "webdav";
+    public $default_uploader_type = "AWS_S3";
     public $uploaders_path = "upload/lib";
     private $driver;
 
     /* The options here come from the config.json */
     public function __construct($options) {
 
-        if (!isset($options['upload_driver'])) {
-            $options['upload_driver'] = $this->default_uploader_type;
-        }
+        $options['upload_driver'] = $this->default_uploader_type;
 
         $type = strtolower($options['upload_driver']);
-        $class_name = "Uploader_" . ucfirst($type);
+        $class_name = "Uploader_AWS_S3";
 
         $settings = $options['upload_driver_options'];
 
